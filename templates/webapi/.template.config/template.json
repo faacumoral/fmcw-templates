@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "facundomoral@hotmail.com",
+    "classifications": [ "Web", "ASP.NET" ],
+    "identity": "fmcw-webapi-template",
+    "name": "FMCW WebApi template",
+    "sourceName": "FMCW.Template",
+    "shortName": "fmcw-webapi-template",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    }
+  }

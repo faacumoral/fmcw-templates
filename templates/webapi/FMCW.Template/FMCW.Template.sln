@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FMCW.Template.API", "FMCW.Template.API\FMCW.Template.API.csproj", "{5B3ECF42-20C2-4EA0-B13C-E58D9A425016}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{029E73E9-BFE9-49E2-A7D5-7F9D0ED0C1BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FMCW.Template.Common", "FMCW.Template.Common\FMCW.Template.Common.csproj", "{4310F9A5-89F4-4837-8333-F24E0C9B1F65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FMCW.Template.Results", "FMCW.Template.Results\FMCW.Template.Results.csproj", "{13BDD05F-D231-45B1-915D-B75F29DB5BF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{87E88FB7-932A-497E-9288-C68C684A7C6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FMCW.Template.Security", "FMCW.Template.Security\FMCW.Template.Security.csproj", "{6513A264-065C-419A-9FF3-71308AF2894C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMCW.Template.EmailSender", "FMCW.Template.EmailSender\FMCW.Template.EmailSender.csproj", "{E9D20BB7-3DEA-4D18-AFE2-E62388AC226B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B3ECF42-20C2-4EA0-B13C-E58D9A425016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3ECF42-20C2-4EA0-B13C-E58D9A425016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3ECF42-20C2-4EA0-B13C-E58D9A425016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3ECF42-20C2-4EA0-B13C-E58D9A425016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4310F9A5-89F4-4837-8333-F24E0C9B1F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4310F9A5-89F4-4837-8333-F24E0C9B1F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4310F9A5-89F4-4837-8333-F24E0C9B1F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4310F9A5-89F4-4837-8333-F24E0C9B1F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13BDD05F-D231-45B1-915D-B75F29DB5BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13BDD05F-D231-45B1-915D-B75F29DB5BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13BDD05F-D231-45B1-915D-B75F29DB5BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13BDD05F-D231-45B1-915D-B75F29DB5BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6513A264-065C-419A-9FF3-71308AF2894C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6513A264-065C-419A-9FF3-71308AF2894C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6513A264-065C-419A-9FF3-71308AF2894C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6513A264-065C-419A-9FF3-71308AF2894C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9D20BB7-3DEA-4D18-AFE2-E62388AC226B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D20BB7-3DEA-4D18-AFE2-E62388AC226B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D20BB7-3DEA-4D18-AFE2-E62388AC226B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D20BB7-3DEA-4D18-AFE2-E62388AC226B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4310F9A5-89F4-4837-8333-F24E0C9B1F65} = {029E73E9-BFE9-49E2-A7D5-7F9D0ED0C1BD}
+		{13BDD05F-D231-45B1-915D-B75F29DB5BF9} = {029E73E9-BFE9-49E2-A7D5-7F9D0ED0C1BD}
+		{6513A264-065C-419A-9FF3-71308AF2894C} = {87E88FB7-932A-497E-9288-C68C684A7C6E}
+		{E9D20BB7-3DEA-4D18-AFE2-E62388AC226B} = {029E73E9-BFE9-49E2-A7D5-7F9D0ED0C1BD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD38075C-7A2A-4DB7-9BE9-3A4BD635C151}
+	EndGlobalSection
+EndGlobal
