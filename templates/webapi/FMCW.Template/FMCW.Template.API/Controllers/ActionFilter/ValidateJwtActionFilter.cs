@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using FMCW.Template.API.Controllers;
 using FMCW.Template.API.Controllers.Attributes;
 using FMCW.Template.Results;
 using FMCW.Template.Security;
@@ -28,6 +27,8 @@ namespace FMCW.Template.API.Controllers.ActionFilter
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
+            IBaseErrorResult result = BoolResult.Ok();
+
             if (context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor)
             {
                 var actionAttributes = controllerActionDescriptor.MethodInfo.GetCustomAttributes(inherit: true).ToList();
@@ -41,7 +42,8 @@ namespace FMCW.Template.API.Controllers.ActionFilter
                 {
                     if (!authorizationToken.ToString().Contains("Bearer"))
                     {
-                        context.Result = context.Result = new JsonResult(StringResult.Error("Authorization header must be 'Bearer xxxxxxxx'"))
+                        result = StringResult.Error("Authorization header must be 'Bearer xxxxxxxx'");
+                        context.Result = new JsonResult(result)
                         {
                             StatusCode = StatusCodes.Status401Unauthorized
                         };
@@ -49,12 +51,12 @@ namespace FMCW.Template.API.Controllers.ActionFilter
                     }
 
                     var jwt = authorizationToken.ToString().Replace("Bearer ", "");
-                    var result = _jwtManager.ValidateToken(jwt);
+                    result = _jwtManager.ValidateToken(jwt);
                     if (result.Success)
                     {
                         var controller = context.Controller as BaseController;
                         controller.Jwt = jwt;
-                        controller.IdUsuario = result.ResultOk;
+                        controller.IdUsuario = ((IntResult)result).ResultOk;
                     }
                     else
                     {
@@ -67,7 +69,8 @@ namespace FMCW.Template.API.Controllers.ActionFilter
                 }
                 else
                 {
-                    context.Result = new JsonResult(StringResult.Error("Authorization header is missing"))
+                    result = StringResult.Error("Authorization header is missing");
+                    context.Result = new JsonResult(result)
                     {
                         StatusCode = StatusCodes.Status401Unauthorized
                     };

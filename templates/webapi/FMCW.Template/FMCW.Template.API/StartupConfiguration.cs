@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FMCW.Template.Security;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -18,6 +19,15 @@ namespace FMCW.Template.API
             });
             return services;
         }
+
+        public static IServiceCollection ConfigureJwt(this IServiceCollection services,
+             IConfiguration configuration)
+        {
+            services.AddConfig<JwtConfiguration>(configuration, "Jwt");
+            services.AddTransient<IJwtManager, JwtManager>();
+            return services;
+        }
+        
 
         public static IServiceCollection AddConfig<T>(
                     this IServiceCollection services,

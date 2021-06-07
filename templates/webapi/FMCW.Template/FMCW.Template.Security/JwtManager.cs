@@ -63,7 +63,11 @@ namespace FMCW.Template.Security
                 var tokenValidationParamters = new TokenValidationParameters
                 {
                     ValidateAudience = true,
+                    ValidAudience = audience,
+
                     ValidateIssuer = true,
+                    ValidIssuer = issuer,
+
                     ValidateActor = false,
                     ValidateLifetime = false,
                     IssuerSigningKey = secretKey
@@ -78,7 +82,7 @@ namespace FMCW.Template.Security
                 if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                     return IntResult.Error("Invalid token");
 
-                var userId = int.Parse(principal.FindFirst("IdUsuario")?.Value ?? "-1");
+                var userId = int.Parse(principal.FindFirst("Id")?.Value ?? "-1");
 
                 if (userId == -1)
                     return IntResult.Error("Missing claim");

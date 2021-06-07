@@ -18,10 +18,12 @@ namespace FMCW.Template.API.Controllers.ActionFilter
 
         public void OnException(ExceptionContext context)
         {
-            context.Result = new JsonResult(BoolResult.Error(context.Exception))
-            {
+            var result = BoolResult.Error(context.Exception);
+            context.Result = new JsonResult(result)
+            {   
                 StatusCode = StatusCodes.Status500InternalServerError
             };
+
             var mensaje = @$"Ha habido una exception no controlado.
                 {context.Exception}
                 {context.HttpContext.Request.Method} {context.HttpContext.Request.QueryString}

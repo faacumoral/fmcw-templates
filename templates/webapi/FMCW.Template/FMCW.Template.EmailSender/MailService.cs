@@ -1,9 +1,7 @@
 ﻿using FMCW.Template.Results;
-using MailKit.Security;
 using Microsoft.Extensions.Logging;
 using MimeKit;
 using System;
-using System.Net.Mail;
 
 namespace FMCW.Template.EmailSender
 {

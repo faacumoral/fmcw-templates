@@ -5,7 +5,7 @@ namespace FMCW.Template.Results
     public class BoolResult : BaseResult<bool, ErrorResult>, IBaseErrorResult
     {
         public static BoolResult Ok()
-            => new BoolResult
+            => new()
             {
                 ResultOk = true,
                 ResultOperation = ResultOperation.Ok,
@@ -13,7 +13,7 @@ namespace FMCW.Template.Results
             };
 
         public static BoolResult Error(Exception ex)
-           => new BoolResult
+           => new()
            {
                ResultError = ErrorResult.Build(ex),
                ResultOperation = ResultOperation.Error,
@@ -21,7 +21,7 @@ namespace FMCW.Template.Results
            };
 
         public static BoolResult Error(string err)
-          => new BoolResult
+          => new()
           {
               ResultError = ErrorResult.Build(err),
               ResultOperation = ResultOperation.Error,
@@ -29,7 +29,7 @@ namespace FMCW.Template.Results
           };
 
         public static BoolResult Error(ErrorResult ex)
-         => new BoolResult
+         => new()
          {
              ResultError = ex,
              ResultOperation = ResultOperation.Error,
