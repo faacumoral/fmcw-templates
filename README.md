@@ -24,7 +24,7 @@ El proyecto es una WebAPI .NET 5. Se utliza inyección de dependencias para las 
 Se define en [ConfigureSwagger](templates/webapi/FMCW.Template/FMCW.Template.API/StartupConfiguration.cs#L15), leyendo del appsettings.json la configuración de nuestra API (section `Application`)
 
 ## Seguridad vía JWT
-Se define mediante el [JwtManager.cs](templates/webapi/FMCW.Template/FMCW.Template.Security/JwtManager.cs) y el [action filter de seguridad]. La configuración necesaria se lee del `appsettings.json` section `Jwt` (templates/webapi/FMCW.Template/FMCW.Template.API/Controllers/ActionFilter/ValidateJwtActionFilter.cs)
+Se define mediante el [JwtManager.cs](templates/webapi/FMCW.Template/FMCW.Template.Security/JwtManager.cs) y el [action filter de seguridad](templates/webapi/FMCW.Template/FMCW.Template.API/Controllers/ActionFilter/ValidateJwtActionFilter.cs). La configuración necesaria se lee del `appsettings.json` section `Jwt` 
 Se validará en cada request entrante si el header `Authorization` está presente y si corresponde a un JWT válido. En caso de que sí, inyectaremos el Id del usuario al que corresponde dicho token en la propiedad `IdUsuario` de [BaseController.cs](templates/webapi/FMCW.Template/FMCW.Template.API/Controllers/BaseController.cs#L9). En caso de ser un método anónimo, utilizar al attribute `NoTokenCheck`
 ```
 [HttpGet("anonymous")]
@@ -50,6 +50,6 @@ Mediante el método `SendMail `de [MailService.cs](templates/webapi/FMCW.Templat
 Se define en el `Progam.cs`, y se utliza Serilog. En este proyecto poseemos dos logeos configurados: a [consola ](templates/webapi/FMCW.Template/FMCW.Template.API/Program.cs#L28) y a [archivo físico](templates/webapi/FMCW.Template/FMCW.Template.API/Program.cs#L30). Desde aquí podemos agregar nuevos outputs para nuestros logs, quitar o modificar los existentes.
 
 ## ActionFilter sútiles
-Actualmente poseemos dos ActionFilters: [Http Status Code](webapi/FMCW.Template/FMCW.Template.API/Controllers/ActionFilter/HttpStatusCodeActionFilter.cs) y de [catcheo de excepciones no controladas](templates/webapi/FMCW.Template/FMCW.Template.API/Controllers/ActionFilter/LogExceptionActionFilter.cs). El primero setea como HTTP status code de la request el valor que posee la propiedad `ResponseStatusCode` del `BaseController.cs`. En caso que dicha propiedad sea null, no modifica modifica la respuesta.
+Actualmente poseemos dos ActionFilters: [Http Status Code](templates/webapi/FMCW.Template/FMCW.Template.API/Controllers/ActionFilter/HttpStatusCodeActionFilter.cs) y de [catcheo de excepciones no controladas](templates/webapi/FMCW.Template/FMCW.Template.API/Controllers/ActionFilter/LogExceptionActionFilter.cs). El primero setea como HTTP status code de la request el valor que posee la propiedad `ResponseStatusCode` del `BaseController.cs`. En caso que dicha propiedad sea null, no modifica modifica la respuesta.
 El segundo catchea todas las excepciones no controladas, logeado la información del error y devolviendo la estructura que tenemos pre-definida.
 
