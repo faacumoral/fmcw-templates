@@ -21,6 +21,7 @@ namespace FMCW.Template.API
         {
             services.ConfigureSwagger(Configuration, "v1")
                 .ConfigureJwt(Configuration)
+                .ConfigureMail(Configuration)
                 .AddControllers(options =>
                 {
                     options.Filters.Add<LogExceptionActionFilter>();

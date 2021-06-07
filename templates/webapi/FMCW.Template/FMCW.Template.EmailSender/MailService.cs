@@ -1,62 +1,61 @@
 ﻿using FMCW.Template.Results;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MimeKit;
-using System;
+using System.Threading.Tasks;
 
 namespace FMCW.Template.EmailSender
 {
-    public class MailService
+    public class MailService : IMailService
     {
-        private readonly EmailConfig _emailConfig;
-        private readonly ILogger<MailService> _logger;
+        private readonly MailConfig _mailConfig;
+        private string _adminMail;
 
-        public MailService(ILogger<MailService> logger,
-                            EmailConfig emailConfig)
+        public MailService(IConfiguration configuration,
+                            MailConfig mailConfig)
         {
-            _logger = logger;
-            _emailConfig = emailConfig;
+            _mailConfig = mailConfig;
+            _adminMail = configuration["Admin"];
         }
 
-        private BoolResult EnviarMail(MimeMessage message)
+        public async Task<BoolResult> SendMail(MailRequest mailRequest)
         {
-            throw new NotImplementedException();
-            //message.From.Add(new MailboxAddress(_emailConfig.FromName, _emailConfig.From));
-            //try
-            //{
-            //    using (var client = new SmtpClient())
-            //    {
-            //        client.Connect(_emailConfig.Smtp, _emailConfig.Port, SecureSocketOptions.StartTls);
-
-            //        client.AuthenticationMechanisms.Remove("XOAUTH2");
-
-            //        // Note: only needed if the SMTP server requires authentication
-            //        client.Authenticate(_emailConfig.From, _emailConfig.FromPassword);
-
-            //        client.Send(message);
-            //        client.Disconnect(true);
-            //    }
-            //    return BoolResult.Ok();
-            //}
-            //catch (SmtpProtocolException ex)
-            //{
-            //    _logger.LogError(ex.ToString());
-            //    return BoolResult.Error(ex);
-            //}
-        }
-
-        public BoolResult SendTestMail()
-        {
-            var message = new MimeMessage();
-            message.To.Add(new MailboxAddress("TO_NAME", "TO_EMAIL"));
-            message.Subject = "SUBJECT";
-
-            var bodyBuilder = new BodyBuilder
+            var email = new MimeMessage
             {
-                HtmlBody = "HTML_BODY"
+                Sender = MailboxAddress.Parse(_mailConfig.From)
             };
-            message.Body = bodyBuilder.ToMessageBody();
+            email.To.Add(MailboxAddress.Parse(mailRequest.To));
+            email.Subject = mailRequest.Subject;
+            var builder = new BodyBuilder();
+            if (mailRequest.Attachments != null)
+            {
+                foreach (var file in mailRequest.Attachments)
+                {  
+                    builder.Attachments.Add(file.FileName, file.Content, ContentType.Parse(file.ContentType));
+                    
+                }
+            }
+            builder.HtmlBody = mailRequest.Body;
+            email.Body = builder.ToMessageBody();
+            using var smtp = new SmtpClient();
+            smtp.Connect(_mailConfig.Smtp, _mailConfig.Port, SecureSocketOptions.StartTls);
+            smtp.Authenticate(_mailConfig.From, _mailConfig.FromPassword);
+            await smtp.SendAsync(email);
+            smtp.Disconnect(true);
+            return BoolResult.Ok();
+        }
 
-            return EnviarMail(message);
+        public async Task<BoolResult> SendTestMail()
+        {
+            var message = new MailRequest
+            {
+                Body = "Test mail",
+                Subject = "Test mail",
+                To = _adminMail
+            };
+            return await SendMail(message);
         }
     }
 }

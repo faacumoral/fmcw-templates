@@ -1,4 +1,5 @@
-﻿using FMCW.Template.Security;
+﻿using FMCW.Template.EmailSender;
+using FMCW.Template.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -17,6 +18,15 @@ namespace FMCW.Template.API
             {
                 options.SwaggerDoc(groupName, openApiInfo);
             });
+            return services;
+        }
+
+
+        public static IServiceCollection ConfigureMail(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddConfig<MailConfig>(configuration, "MailConfig");
+            services.AddTransient<IMailService, MailService>();
             return services;
         }
 

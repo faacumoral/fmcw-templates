@@ -1,7 +1,4 @@
-
-#Ignore thumbnails created by Windows
 Thumbs.db
-#Ignore files built by Visual Studio
 *.obj
 *.exe
 *.pdb
@@ -32,7 +29,3 @@ _ReSharper*/
 #Nuget packages folder
 packages/
 key
-appsettings.Development.json
-appsettings.Production.json
-appsettings.json
-key.json
